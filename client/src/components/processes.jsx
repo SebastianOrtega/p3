@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-//import Process from "./process";
 import axios from "axios";
-//import { getMovies } from "../services/fakeMovieService";
+const apiEndpoint = "http://localhost/api/process";
 
 class Processes extends Component {
-  state = { Process_name: [] };
-
-  /*handleDelete = p => {
-    console.log(p);
-    const movies = this.state.movies.filter(m => m._id !== p._id);
-    this.setState({ movies });
-  };*/
+  state = { Process_name: [], id: [] };
 
   handleDelete = p => {
     console.log(p);
@@ -24,14 +17,19 @@ class Processes extends Component {
     console.log("View: ", p);
   };
 
-  handleAdd = () => {
+  handleAdd = async () => {
     console.log("Add Process");
+    const obj = {
+      Process_name: "Proceso agragado",
+      Process_Description: "Descripcioin "
+    };
+    const { data: post } = await axios.post(apiEndpoint, obj);
+    const Process_name = [post, ...this.state.Process_name];
+    this.setState({ Process_name });
   };
 
   async componentDidMount() {
-    const { data: Process_name } = await axios.get(
-      "http://localhost/api/process"
-    );
+    const { data: Process_name } = await axios.get(apiEndpoint);
     console.log({ Process_name });
     this.setState({ Process_name });
   }
@@ -62,8 +60,12 @@ class Processes extends Component {
           <tbody>
             {//<Process processName="Proceso numero 1" />
             this.state.Process_name.map(p => (
-              <tr key={p.Process_name}>
-                <td> {p.Process_name}</td>
+              <tr key={p.id}>
+                <td>
+                  {" "}
+                  <span style={{ marginRight: 10, color: "blue" }}>{p.id}</span>
+                  <span style={{ fontStyle: "Italic" }}>{p.Process_name}</span>
+                </td>
                 <td />
                 <td>
                   <button
