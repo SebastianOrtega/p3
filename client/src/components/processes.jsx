@@ -3,13 +3,11 @@ import axios from "axios";
 const apiEndpoint = "http://localhost/api/process";
 
 class Processes extends Component {
-  state = { Process_name: [], id: [] };
+  state = { Process_name: [] };
 
   handleDelete = p => {
     console.log(p);
-    const Process_name = this.state.Process_name.filter(
-      pro => pro.Process_name !== p.Process_name
-    );
+    const Process_name = this.state.Process_name.filter(pro => pro.id !== p.id);
     this.setState({ Process_name });
   };
 
