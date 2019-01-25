@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-const apiEndpoint = "http://localhost/api/process";
+const apiEndpoint = "http://localhost/api/process/";
 
 class Processes extends Component {
   state = { Process_name: [] };
 
-  handleDelete = p => {
+  handleDelete = async p => {
     console.log(p);
+    const result = await axios.delete(apiEndpoint + p.id);
+    console.log(result);
     const Process_name = this.state.Process_name.filter(pro => pro.id !== p.id);
     this.setState({ Process_name });
   };
