@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 
 class Login extends Component {
-  state = {};
+  state = { access: { username: "", password: "" } };
 
   handleSubmit = e => {
     e.preventDefault();
     console.log("login enviado");
   };
+
+  handleChange = e => {
+    const access = { ...this.state.access };
+    access[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ access });
+  };
+
   render() {
     return (
       <div className="jumbotron m-4">
@@ -15,15 +22,25 @@ class Login extends Component {
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
+              value={this.state.access.username}
+              onChange={this.handleChange}
               autoFocus
               id="username"
+              name="username"
               type="text"
               className="form-control"
             />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input id="password" type="text" className="form-control" />
+            <input
+              value={this.state.access.password}
+              onChange={this.handleChange}
+              name="password"
+              id="password"
+              type="password"
+              className="form-control"
+            />
           </div>
           <button className="btn btn-primary">Login</button>
         </form>

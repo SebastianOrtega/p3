@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 const apiEndpoint = "http://localhost/api/process/";
 
@@ -51,13 +53,13 @@ class Processes extends Component {
               <th>Process</th>
 
               <th>
-                <button
-                  onClick={() => this.handleAdd()}
+                <Link
+                  to="/addProcess"
                   style={{ marginLeft: 0, marginTop: 10 }}
                   className="btn btn-success btn-sm"
                 >
                   Add Process
-                </button>
+                </Link>
               </th>
             </tr>
           </thead>

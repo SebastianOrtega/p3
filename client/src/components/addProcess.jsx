@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 const apiEndpoint = "http://localhost/api/process/";
 
@@ -7,14 +8,16 @@ class AddProcess extends Component {
     process: {
       Process_name: "",
       Process_Description: "",
-      NumSerie: ""
+      NumSerie: "",
+      toProceses: false
     }
   };
   handleSubmit = async e => {
     e.preventDefault();
     console.log("Add Process in database");
-    const { data: post } = await axios.post(apiEndpoint, this.state.process);
-    window.location.href = "/processes";
+    const result = await axios.post(apiEndpoint, this.state.process);
+    console.log(result);
+    this.setState({ toProceses: true });
   };
 
   handleChange = e => {
@@ -29,9 +32,15 @@ class AddProcess extends Component {
   };
 
   render() {
+    {
+      if (this.state.toProceses === true) {
+        return <Redirect to="/processes" />;
+      }
+    }
     return (
       <div className="jumbotron m-4">
         <h1>Add Process</h1>
+
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="Process_name">Process Name</label>
@@ -64,13 +73,13 @@ class AddProcess extends Component {
             />
           </div>
           <button className="btn btn-primary">Add</button>
-          <button
-            onClick={this.handleCancel}
+          <Link
+            to="/processes"
             style={{ float: "right" }}
             className="btn btn-danger"
           >
             Cancel
-          </button>
+          </Link>
         </form>
       </div>
     );
