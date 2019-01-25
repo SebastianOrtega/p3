@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import View from "./view";
 
 import axios from "axios";
 const apiEndpoint = "http://localhost/api/process/";
 
 class Processes extends Component {
-  state = { Process_name: [] };
+  state = { Process_name: [], toView: false, onFocus: "", ProcessName: "" };
 
   handleDelete = async p => {
     console.log(p);
@@ -17,21 +18,11 @@ class Processes extends Component {
 
   handleView = p => {
     console.log("View: ", p);
-  };
-
-  /* handleAdd = async () => {
-    console.log("Add Process");
-    const obj = {
-      Process_name: "Proceso agragado",
-      Process_Description: "Descripcioin "
-    };
-    const { data: post } = await axios.post(apiEndpoint, obj);
-    const Process_name = [post, ...this.state.Process_name];
-    this.setState({ Process_name });
-  }; */
-
-  handleAdd = () => {
-    window.location.href = "/addProcess";
+    this.setState({
+      toView: true,
+      onFocus: p.IdDevice1,
+      ProcessName: p.Process_name
+    });
   };
 
   async componentDidMount() {
@@ -40,6 +31,14 @@ class Processes extends Component {
     this.setState({ Process_name });
   }
   render() {
+    if (this.state.toView === true) {
+      return (
+        <View
+          NumSerie={this.state.onFocus}
+          ProcessName={this.state.ProcessName}
+        />
+      );
+    }
     if (this.state.Process_name.length === 0)
       return <h2>There are no processes in database</h2>;
     return (
