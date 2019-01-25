@@ -17,7 +17,7 @@ class Processes extends Component {
     console.log("View: ", p);
   };
 
-  handleAdd = async () => {
+  /* handleAdd = async () => {
     console.log("Add Process");
     const obj = {
       Process_name: "Proceso agragado",
@@ -26,6 +26,10 @@ class Processes extends Component {
     const { data: post } = await axios.post(apiEndpoint, obj);
     const Process_name = [post, ...this.state.Process_name];
     this.setState({ Process_name });
+  }; */
+
+  handleAdd = () => {
+    window.location.href = "/addProcess";
   };
 
   async componentDidMount() {
