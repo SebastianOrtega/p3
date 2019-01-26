@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import StatsCard from "./statsCard";
 import Graph from "./graph";
 import axios from "axios";
@@ -16,10 +16,10 @@ class View extends Component {
   }
 
   formatDate(d) {
-    console.log(d);
+    //console.log(d);
     var newStr = d.substring(0, d.length - 1);
     const dateObject = new Date(newStr);
-    console.log(dateObject);
+    //console.log(dateObject);
     return (
       dateObject.toLocaleDateString("es-MX") +
       " " +

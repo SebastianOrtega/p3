@@ -10,15 +10,16 @@ class Processes extends Component {
   state = { Process_name: [], toView: false, onFocus: "", ProcessName: "" };
 
   handleDelete = async p => {
-    console.log(p);
+    //console.log(p);
     const result = await axios.delete(apiEndpoint + p.id);
     console.log(result);
+
     const Process_name = this.state.Process_name.filter(pro => pro.id !== p.id);
     this.setState({ Process_name });
   };
 
   handleView = p => {
-    console.log("View: ", p);
+    //console.log("View: ", p);
     this.setState({
       toView: true,
       onFocus: p.IdDevice1,
@@ -28,7 +29,7 @@ class Processes extends Component {
 
   async componentDidMount() {
     const { data: Process_name } = await axios.get(apiEndpoint);
-    console.log({ Process_name });
+    //console.log({ Process_name });
     this.setState({ Process_name });
   }
   render() {
