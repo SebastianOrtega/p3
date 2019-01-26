@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
 export class StatsCard extends Component {
+  state = { update: false };
+
+  componentWillReceiveProps(nextprops) {
+    this.setState({ update: true });
+  }
+
   render() {
-    return (
+    return this.state.update ? (
       <div className="card" style={{ width: "18rem" }}>
         <div className="card-body">
           <h5 className="card-title" style={{ textAlign: "center" }}>
@@ -16,6 +22,8 @@ export class StatsCard extends Component {
           </p>
         </div>
       </div>
+    ) : (
+      <h1>Sin Info</h1>
     );
   }
 }

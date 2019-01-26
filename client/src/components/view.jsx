@@ -7,12 +7,19 @@ const apiEndpoint =
   "http://ec2-3-83-99-249.compute-1.amazonaws.com/device/numserie/";
 
 class View extends Component {
-  state = { data: [] };
+  state = { data: [], LectureP1: 0, LectureP2: 0, size: 0 };
 
   async componentDidMount() {
     const result = await axios.get(apiEndpoint + this.props.NumSerie);
-    //console.log(result.data);
-    this.setState({ data: result.data });
+    //console.log("ya estan los datos", result.data);
+    console.log(result.data.length);
+
+    this.setState({
+      data: result.data,
+      LectureP1: result.data[result.data.length - 1].LectureP1,
+      LectureP2: result.data[result.data.length - 1].LectureP1,
+      size: result.data.length
+    });
   }
 
   formatDate(d) {
@@ -27,12 +34,6 @@ class View extends Component {
     );
   }
 
-  lastData() {
-    //const gg = this.state.data;
-    //console.log("GG", gg);
-    return "25";
-  }
-
   render() {
     return (
       <div>
@@ -44,13 +45,13 @@ class View extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm">
-              <StatsCard value={this.lastData()} text={"Temperature"} />
+              <StatsCard value={this.state.LectureP1} text={"Temperature"} />
             </div>
             <div className="col-sm">
-              <StatsCard value={"70"} text={"Humidity"} />
+              <StatsCard value={this.state.LectureP2} text={"Humidity"} />
             </div>
             <div className="col-sm">
-              <StatsCard value={"34"} text={"DataPoints"} />
+              <StatsCard value={this.state.size} text={"DataPoints"} />
             </div>
           </div>
         </div>
