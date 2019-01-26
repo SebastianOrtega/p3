@@ -2,11 +2,18 @@ import React, { Component } from "react";
 import { Chart } from "react-google-charts";
 
 class Graph extends Component {
-  state = { data: [] };
+  state = {};
 
+  componentDidMount() {
+    console.log("did mount");
+  }
+  componentDidUpdate() {
+    console.log("did updated");
+  }
   render() {
     return (
       <div className={"my-pretty-chart-container"}>
+        {console.log("return en render")}
         <Chart
           chartType="LineChart"
           data={[

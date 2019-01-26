@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import StatsCard from "./statsCard";
 import Graph from "./graph";
 import axios from "axios";
-const apiEndpoint = "http://localhost/device/numserie/";
+const apiEndpoint =
+  "http://ec2-3-83-99-249.compute-1.amazonaws.com/device/numserie/";
 
 class View extends Component {
   state = { data: [] };
@@ -15,9 +16,10 @@ class View extends Component {
   }
 
   formatDate(d) {
-    //console.log(d);
-    const dateObject = new Date(d);
-    //console.log(dateObject);
+    console.log(d);
+    var newStr = d.substring(0, d.length - 1);
+    const dateObject = new Date(newStr);
+    console.log(dateObject);
     return (
       dateObject.toLocaleDateString("es-MX") +
       " " +
@@ -37,12 +39,22 @@ class View extends Component {
         <h1>Detail</h1>
         <h2>Process Name: {this.props.ProcessName}</h2>
         <h2>Sensor Number: {this.props.NumSerie}</h2>
-        <span>
-          <StatsCard value={this.lastData()} text={"Temperature"} />
-        </span>
-        <span>
-          <StatsCard value={"70"} text={"Humidity"} />
-        </span>
+        <hr />
+
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <StatsCard value={this.lastData()} text={"Temperature"} />
+            </div>
+            <div className="col-sm">
+              <StatsCard value={"70"} text={"Humidity"} />
+            </div>
+            <div className="col-sm">
+              <StatsCard value={"34"} text={"DataPoints"} />
+            </div>
+          </div>
+        </div>
+
         <Graph data={this.state.data} />
 
         <h2>Data</h2>
@@ -54,13 +66,12 @@ class View extends Component {
               <th>Humidity (Relative%)</th>
 
               <th>
-                <Link
-                  to="/login"
+                <button
                   style={{ marginLeft: 0, marginTop: 10 }}
                   className="btn btn-success btn-sm"
                 >
                   Return to List
-                </Link>
+                </button>
               </th>
             </tr>
           </thead>
