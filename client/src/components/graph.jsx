@@ -39,16 +39,21 @@ class Graph extends Component {
           data={this.state.data}
           options={{
             curveType: "function",
-            hAxis: {
-              title: "Date"
+            hAxis: { title: "Date" },
+            vAxis: { title: "Temperature" },
+            animation: {
+              duration: 1000,
+              easing: "linear",
+              startup: true
             },
-            vAxis: {
-              title: "Temperature"
+            explorer: {
+              maxZoomOut: 2,
+              keepInBounds: true
             }
           }}
           rootProps={{ "data-testid": "1" }}
           width="100%"
-          height="400px"
+          height="700px"
           legendToggle
         />
       </div>
