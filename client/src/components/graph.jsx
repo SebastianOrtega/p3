@@ -4,12 +4,25 @@ import { Chart } from "react-google-charts";
 class Graph extends Component {
   state = { data: [], dataLoadingStatus: "false" };
 
+  formatDate(d) {
+    console.log(d);
+    var newStr = d.substring(0, d.length - 1);
+    const dateObject = new Date(newStr);
+    console.log(dateObject);
+    return (
+      dateObject.toLocaleDateString("es-MX") +
+      " " +
+      dateObject.toLocaleTimeString()
+    );
+  }
+
   componentWillReceiveProps(nextprops) {
     const newData = [0, 0, 0];
-    console.log(nextprops.data);
+    //console.log(nextprops.data);
     for (let i = 1; i < nextprops.data.length; i++) {
+      //console.log(nextprops.data[i].createdAt);
       newData[i] = [
-        nextprops.data[i].createdAt,
+        new Date(nextprops.data[i].createdAt),
         nextprops.data[i].LectureP1,
         nextprops.data[i].LectureP2
       ];

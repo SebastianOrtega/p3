@@ -11,13 +11,12 @@ class View extends Component {
 
   async componentDidMount() {
     const result = await axios.get(apiEndpoint + this.props.NumSerie);
-    //console.log("ya estan los datos", result.data);
     console.log(result.data.length);
 
     this.setState({
       data: result.data,
       LectureP1: result.data[result.data.length - 1].LectureP1,
-      LectureP2: result.data[result.data.length - 1].LectureP1,
+      LectureP2: result.data[result.data.length - 1].LectureP2,
       size: result.data.length
     });
   }
@@ -45,10 +44,10 @@ class View extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm">
-              <StatsCard value={this.state.LectureP1} text={"Temperature"} />
+              <StatsCard value={this.state.LectureP1} text={"Temp (ºC)"} />
             </div>
             <div className="col-sm">
-              <StatsCard value={this.state.LectureP2} text={"Humidity"} />
+              <StatsCard value={this.state.LectureP2} text={"Humidity (%)"} />
             </div>
             <div className="col-sm">
               <StatsCard value={this.state.size} text={"DataPoints"} />

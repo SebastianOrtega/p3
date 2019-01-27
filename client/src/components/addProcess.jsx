@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-const apiEndpoint = "http://localhost/api/process/";
+const apiEndpoint =
+  "http://ec2-3-83-99-249.compute-1.amazonaws.com/api/process/";
 
 class AddProcess extends Component {
   state = {
     process: {
       Process_name: "",
       Process_Description: "",
-      NumSerie: "",
+      idDevice1: "",
       toProceses: false
     }
   };
@@ -64,7 +65,7 @@ class AddProcess extends Component {
             <div className="form-group">
               <label htmlFor="NumSerie">Serial Number</label>
               <input
-                name="NumSerie"
+                name="idDevice1"
                 onChange={this.handleChange}
                 type="text"
                 className="form-control"

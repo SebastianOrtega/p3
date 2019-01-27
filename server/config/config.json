@@ -4,8 +4,16 @@
     "password": "bootcamp",
     "database": "Industry4_0",
     "host": "localhost",
-    "dialect": "mysql"
-  },
+    "dialect": "mysql", 
+    "dialectOptions": {
+      "useUTC": false,
+      "dateStrings": true
+    },
+    "timezone": "-06:00"
+    
+  }
+
+
   "test": {
     "username": "root",
     "password": "bootcamp",
@@ -19,3 +27,6 @@
     "dialect": "mysql"
   }
 }
+
+
+
